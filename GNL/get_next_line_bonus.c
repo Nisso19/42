@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaainouc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 19:30:20 by yaainouc          #+#    #+#             */
-/*   Updated: 2021/11/24 16:35:07 by yaainouc         ###   ########.fr       */
+/*   Created: 2021/11/24 16:59:16 by yaainouc          #+#    #+#             */
+/*   Updated: 2021/11/24 17:13:16 by yaainouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_join(int fd, char *tab[4096], char *buf)
 {
