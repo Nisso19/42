@@ -1,31 +1,30 @@
 #include "../includes/minishell.h"
 
-t_input     *init_input(char **pipelines)
+int         pipelines_check(char *s)
 {
-    t_input     *input;
-    int         i;
-    int         nb_pipes;
+    int i;
+    int c_found;
 
-    i = -1;
-    nb_pipes = 1;
-    while (pipelines[++i])
-        nb_pipes++;
-    input = (t_input *)malloc(sizeof(t_input) * nb_pipes);
-    if (!input)
-        return (NULL);
-    i = -1;
-    while (pipelines[++i])
+    i = 0;
+    c_found = 0;
+    while(s[i])
     {
-        input[i].token = NULL;
-        input[i].path = NULL;
-        input[i].string = pipelines[i];
+        if (!ft_strchr("| \t\n\v\f\r", s[i]))
+            c_found = 1;
+        else if (s[i] == '|')
+        {
+            if (c_found == 0)
+                return (0);
+            c_found = 0;
+        }
+        i++;
     }
-    input[i - 1].is_last = 1;
-    i = -1;
-    return (input);
+    if (c_found == 0)
+        return (0);
+    return (1);
 }
 
-int         get_input(t_input **main_input)
+int         get_input()
 {
     char        *line;
     char        **pipelines;
@@ -34,34 +33,51 @@ int         get_input(t_input **main_input)
     line = get_next_line(0);
     if (!line)
         return (0);
-    pipelines = ft_split_n_quotes(line, '|');
+    if (!pipelines_check(line))
+    {
+        data.errors = SYNTAX_ERROR;
+        printf("Syntax error : empty pipeline\n");
+        return (0);
+    }
+    pipelines = ft_split_n_quotes(line, "|");
     if (!pipelines)
         return (0);
     input = init_input(pipelines);
+    free(pipelines);
     if (!input)
         return (0);
-    free(pipelines);
-    *main_input = input;
-
-    // DEBUG
-
-    int i;
-    i = 0;
-    printf("pipelines :\n");
-    while(1)
-    {
-        printf("[%s] ", input[i].string);
-        if (input[i].is_last)
-            break ;
-        i++;
-    }
-    printf("\npipes = %d\n", i + 1);
+    data.input = input;
     return (1);
 }
 
-/*
+int         get_tokens()
+{
+    int     i;
+    t_input *input;
+    char    **words;
+
+    i = 0;
+    input = data.input;
+    while (input[i].string)
+    {
+        words = ft_split_n_quotes(input[i].string, " \t\n\v\f\r");
+        if (!words)
+            return (0);
+        input[i].token = init_token(input[i], words);
+        free(words);
+        i++;
+    }
+    return (1);
+}
+
 int         lexer()
 {
-    
+    if (!get_input()
+        || !input_debug()
+        || !get_tokens()
+        || !tokens_debug())
+        {
+            if (data.errors == NONE) // si NONE -> erreur de malloc donc on exit
+                return (0);
+        }
 }
-*/
