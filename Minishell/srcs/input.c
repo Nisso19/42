@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 t_input     *init_input(char **pipelines)
 {
@@ -47,7 +47,7 @@ int         get_input(t_input **main_input)
 
     int i;
     i = 0;
-    printf("pipelines =\n");
+    printf("pipelines :\n");
     while(1)
     {
         printf("[%s] ", input[i].string);

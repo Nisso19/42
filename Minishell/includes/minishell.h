@@ -2,7 +2,7 @@
 #define MINISHELL_H
 #include <stdlib.h>
 #include <stdio.h>
-#include "gnl/get_next_line.h"
+#include "get_next_line.h"
 
 typedef struct	s_token
 {

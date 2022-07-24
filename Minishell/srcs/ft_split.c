@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int		check_quotes(char *str, int a, int *quote)
 {
