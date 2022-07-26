@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int		len(char *str, int a, char *c)
 {
@@ -9,7 +9,7 @@ int		len(char *str, int a, char *c)
 	quote = 0;
 	while (str[a] && (!split_check(str, a, c) || quote))
 	{
-		split_check_quotes(str, a, &quote);
+		check_quotes(str[a], &quote);
 		a++;
 		b++;
 	}
@@ -24,7 +24,7 @@ char	*ft_cpy(char *dest, char *str, int a, char *c)
 	b = 0;
 	while (str[a] && (!split_check(str, a, c) || quote))
 	{
-		split_check_quotes(str, a, &quote);
+		check_quotes(str[a], &quote);
 		dest[b] = str[a];
 		a++;
 		b++;
@@ -40,7 +40,6 @@ char	**final_check(char **tab, int quote)
 	i = -1;
 	if (quote)
 	{
-		printf("Syntax error: unmatched quote\n");
 		data.errors = SYNTAX_ERROR;
 		while (tab[++i])
 			free(tab[i]);
@@ -69,7 +68,7 @@ char	**ft_split_n_quotes(const char *stre, char *c)
 			tab[b] = (char*)malloc(sizeof(char) * (len(str, a, c) + 1));
 			ft_cpy(tab[b], str, a, c);
 			b++;
-			while (str[a] && (split_check_quotes(str, a, &quote)
+			while (str[a] && (check_quotes(str[a], &quote)
 				|| !split_check(str, a, c)))
 				a++;
 			a--;

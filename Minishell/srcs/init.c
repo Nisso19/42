@@ -39,7 +39,7 @@ t_token     *init_token(t_input input, char **words)
     while (words[i])
     {
         token[i].word = words[i];
-        token[i].is_expanded = NULL;
+        token[i].is_expanded = 0;
         i++;
     }
     token[i].word = NULL;

@@ -12,7 +12,7 @@ int    input_debug()
         printf("[%s] ", input[i].string);
         i++;
     }
-    printf("\npipelines = %d\n", i + 1);
+    printf("\npipelines = %d\n", i);
     return (1);
 }
 

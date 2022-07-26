@@ -3,7 +3,10 @@
 
 int main(int ac, char **av)
 {
+    extern char    **environ;
+
     data.errors = NONE;
+    data.env = environ;
     data.input = NULL;
     while(1)
     {

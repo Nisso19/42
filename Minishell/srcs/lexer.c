@@ -36,7 +36,6 @@ int         get_input()
     if (!pipelines_check(line))
     {
         data.errors = SYNTAX_ERROR;
-        printf("Syntax error : empty pipeline\n");
         return (0);
     }
     pipelines = ft_split_n_quotes(line, "|");
@@ -75,9 +74,13 @@ int         lexer()
     if (!get_input()
         || !input_debug()
         || !get_tokens()
+        || !tokens_debug()
+        || !parameter_expansions()
         || !tokens_debug())
         {
             if (data.errors == NONE) // si NONE -> erreur de malloc donc on exit
                 return (0);
+            else if (data.errors == SYNTAX_ERROR)
+                printf("Syntax error\n");
         }
 }
