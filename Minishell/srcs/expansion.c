@@ -2,11 +2,8 @@
 
 int     substitute_expansion(char **word, char **str)
 {
-    char    *tmp;
-
-    tmp = *word;
+    free(*word);
     *word = *str;
-    free(tmp);
     return (1);
 }
 
@@ -38,11 +35,12 @@ int     delimit_expansion(char *word, int *i, char **str)
     exp = NULL;
     b = 0;
     ft_bzero(buf, sizeof(char) * 20);
-    if (!word[*i + 1] == '_' && !ft_isalpha(word[*i + 1]))
+    (*i)++;
+    if (word[*i] != '_' && !ft_isalpha(word[*i]))
         return (1);
-    while (word[++*i] == '_' || ft_isalnum(word[*i]))
+    while (word[*i] == '_' || ft_isalnum(word[*i]))
     {
-        buf[b++] = word[*i];
+        buf[b++] = word[(*i)++];
         if (b >= 19 && !buffer_flush(buf, &exp, &b))
         {
             free(*str);
@@ -75,8 +73,6 @@ int     find_expansions(char  **word, int i, int b, int quote)
         }
         else
             buf[b++] = (*word)[i];
-        printf("word=%s, i=%d \n", *word, i);
-        printf("str=[%s]\n", str);
         if (b >= 19 && !buffer_flush(buf, &str, &b))
             return (clean_free((void**)word));
     }
