@@ -24,7 +24,7 @@ int		split_word_count(char *str, char *c)
 	a = 0;
 	i = 0;
 	quote = 0;
-	if (str[a] && (check_quotes(str[a], &quote) || split_check(str, a, c)))
+	if (str[a] && (check_quotes(str[a], &quote) || !split_check(str, a, c)))
 		i++;
 	while (str[a])
 	{

@@ -33,7 +33,7 @@ char	*ft_cpy(char *dest, char *str, int a, char *c)
 	return (dest);
 }
 
-char	**final_check(char **tab, int quote)
+char	**split_final_check(char **tab, int quote)
 {
 	int i;
 
@@ -74,5 +74,5 @@ char	**ft_split_n_quotes(const char *stre, char *c)
 			a--;
 		}
 	tab[b] = 0;
-	return (final_check(tab, quote));
+	return (split_final_check(tab, quote));
 }

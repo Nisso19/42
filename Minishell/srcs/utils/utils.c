@@ -1,5 +1,32 @@
 #include "../../includes/minishell.h"
 
+char	**ft_tabjoin(char **tab1, char **tab2)
+{
+	char	**ret;
+	int		len1;
+	int		len2;
+	int 	i;
+
+	len1 = 0;
+	len2 = 0;
+	if (!tab1 || !tab2)
+		return (0);
+	while (tab1[len1])
+		len1++;
+	while (tab2[len2])
+		len2++;
+	ret = (char **)malloc(sizeof(char) * (len1 + len2 + 1));
+	if (!ret)
+		return (0);
+	i = 0;
+	while (*tab1)
+		ret[i++] = *(tab1++);
+	while (*tab2)
+		ret[i++] = *(tab2++);
+	ret[i] = NULL;
+	return (ret);
+}
+
 int		check_quotes(char c, int *quote)
 {
 	if (c == '\"')

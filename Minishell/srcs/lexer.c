@@ -30,7 +30,7 @@ int         get_input()
     char        **pipelines;
     t_input     *input;
 
-    line = get_next_line(0);
+    line = readline(0);
     if (!line)
         return (0);
     if (!pipelines_check(line))
@@ -49,17 +49,51 @@ int         get_input()
     return (1);
 }
 
+char        **split_tokens(char **words)
+{
+    int     i;
+    char    **tokens;
+    char    **tmp;
+    char    **tmp2;
+
+    i = 0;
+    tokens = NULL;
+    while(words[i] != NULL)
+    {
+        tmp = ft_redir_n_quotes(words[i]);
+        if (tokens)
+        {
+            tmp2 = tmp;
+            tmp = ft_tabjoin(tokens, tmp);
+            free(tmp2);
+            free(tokens);
+        }
+        tokens = tmp;
+        if (!tokens)
+            return (0);
+        i++;
+    }
+    return (tokens);
+}
+
 int         get_tokens()
 {
     int     i;
-    t_input *input;
+    int     j;
     char    **words;
+    char    **tmp;
+    t_input *input;
 
     i = 0;
     input = data.input;
     while (input[i].string)
     {
         words = ft_split_n_quotes(input[i].string, " \t\n\v\f\r");
+        if (!words)
+            return (0);
+        tmp = words;
+        words = split_tokens(words);
+        free(tmp);
         if (!words)
             return (0);
         input[i].token = init_token(input[i], words);
@@ -79,7 +113,10 @@ int         lexer()
         || !tokens_debug())
         {
             if (data.errors == NONE) // si NONE -> erreur de malloc donc on exit
+            {
+                printf("malloc error\n");
                 return (0);
+            }
             else if (data.errors == SYNTAX_ERROR)
                 printf("Syntax error\n");
         }

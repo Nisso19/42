@@ -2,6 +2,8 @@
 #define MINISHELL_H
 #include <stdlib.h>
 #include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 #include "get_next_line.h"
 #include "../srcs/Libft/libft.h"
 
@@ -82,6 +84,9 @@ int					lexer();
 char				**ft_split_n_quotes(const char *stre, char *c);
 int					split_check(char *str, int a, char *c);
 int					split_word_count(char *s, char *c);
+char				**split_final_check(char **tab, int quote);
+char				**ft_redir_n_quotes(const char *stre);
+char				**ft_tabjoin(char **tab1, char **tab2);
 
 /*
 **	PARSER

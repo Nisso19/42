@@ -64,7 +64,7 @@ int     find_expansions(char  **word, int i, int b, int quote)
     ft_bzero(buf, sizeof(char) * 20);
     while ((*word)[++i])
     {
-        if (!check_quotes((*word)[i], &quote) && (*word)[i] == '$')
+        if (check_quotes((*word)[i], &quote) != 1 && (*word)[i] == '$')
         {
             buffer_flush(buf, &str, &b);
             if (!delimit_expansion(*word, &i, &str))
