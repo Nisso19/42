@@ -6,7 +6,7 @@
 /*   By: yaainouc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 14:19:10 by yaainouc          #+#    #+#             */
-/*   Updated: 2020/12/01 14:16:39 by yaainouc         ###   ########.fr       */
+/*   Updated: 2021/02/09 14:03:09 by yaainouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t	i;
-	void	*str;
+	char	*str;
 
-	i = 0;
-	if (!(str = malloc(nmemb * size)))
+	if (nmemb == 0 || size == 0)
+	{
+		nmemb = 1;
+		size = 1;
+	}
+	str = malloc(nmemb * size);
+	if (!str)
 		return (NULL);
-	ft_bzero(str, nmemb);
+	ft_bzero(str, nmemb * size);
 	return (str);
 }

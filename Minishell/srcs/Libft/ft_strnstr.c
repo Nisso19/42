@@ -20,7 +20,7 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 	a = 0;
 	b = 0;
 	if (!(s2[0]))
-		return ((char*)s1);
+		return ((char *)s1);
 	while (s1[a] && a < len)
 	{
 		b = 0;
@@ -30,7 +30,7 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 			b++;
 		}
 		if (!s2[b])
-			return ((char*)s1 + a - b);
+			return ((char *)s1 + a - b);
 		else if (!(s1[a]))
 			break ;
 		else

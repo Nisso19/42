@@ -24,7 +24,7 @@ int         pipelines_check(char *s)
     return (1);
 }
 
-int         get_input()
+int         get_input(t_data *data)
 {
     char        *line;
     char        **pipelines;
@@ -35,21 +35,22 @@ int         get_input()
         return (0);
     if (!pipelines_check(line))
     {
-        data.errors = SYNTAX_ERROR;
+        data->errors = SYNTAX_ERROR;
+        printf("test");
         return (0);
     }
-    pipelines = ft_split_n_quotes(line, "|");
+    pipelines = ft_split_n_quotes(line, "|", data);
     if (!pipelines)
         return (0);
     input = init_input(pipelines);
     free(pipelines);
     if (!input)
         return (0);
-    data.input = input;
+    data->input = input;
     return (1);
 }
 
-char        **split_tokens(char **words)
+char        **split_tokens(char **words, t_data *data)
 {
     int     i;
     char    **tokens;
@@ -60,7 +61,7 @@ char        **split_tokens(char **words)
     tokens = NULL;
     while(words[i] != NULL)
     {
-        tmp = ft_redir_n_quotes(words[i]);
+        tmp = ft_redir_n_quotes(words[i], data);
         if (tokens)
         {
             tmp2 = tmp;
@@ -76,48 +77,48 @@ char        **split_tokens(char **words)
     return (tokens);
 }
 
-int         get_tokens()
+int         get_tokens(t_data *data)
 {
     int     i;
-    int     j;
     char    **words;
     char    **tmp;
     t_input *input;
 
     i = 0;
-    input = data.input;
+    input = data->input;
     while (input[i].string)
     {
-        words = ft_split_n_quotes(input[i].string, " \t\n\v\f\r");
+        words = ft_split_n_quotes(input[i].string, " \t\n\v\f\r", data);
         if (!words)
             return (0);
         tmp = words;
-        words = split_tokens(words);
+        words = split_tokens(words, data);
         free(tmp);
         if (!words)
             return (0);
-        input[i].token = init_token(input[i], words);
+        input[i].token = init_token(words);
         free(words);
         i++;
     }
     return (1);
 }
 
-int         lexer()
+int         lexer(t_data *data)
 {
-    if (!get_input()
-        || !input_debug()
-        || !get_tokens()
-        || !tokens_debug()
-        || !parameter_expansions()
-        || !tokens_debug())
+    if (!get_input(data)
+        || !input_debug(data)
+        || !get_tokens(data)
+        || !parameter_expansions(data)
+        || !set_type(data)
+        || !tokens_debug(data))
         {
-            if (data.errors == NONE) // si NONE -> erreur de malloc donc on exit
+            if (data->errors == NONE) // si NONE -> erreur de malloc donc on exit
             {
                 printf("malloc error\n");
                 return (0);
             }
-            else if (data.errors == SYNTAX_ERROR)
+            else if (data->errors == SYNTAX_ERROR)
                 printf("Syntax error\n");
         }
+        return(1);
 }

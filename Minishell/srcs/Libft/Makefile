@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yaainouc <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: yaainouc <yaainouc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/28 13:56:27 by yaainouc          #+#    #+#              #
-#    Updated: 2021/01/06 14:23:48 by yaainouc         ###   ########.fr        #
+#    Updated: 2021/12/03 14:38:34 by yaainouc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ FLAG = -Wall -Wextra -Werror
 NAME = libft.a
 
 SRC = ft_atoi.c \
-      ft_strncpy.c \
       ft_lstnew.c \
 	  ft_bzero.c \
 	  ft_memcmp.c \
@@ -26,7 +25,6 @@ SRC = ft_atoi.c \
 	  ft_isascii.c \
 	  ft_isdigit.c \
 	  ft_isprint.c \
-	  ft_itoa.c \
 	  ft_memccpy.c \
 	  ft_memchr.c \
 	  ft_memcpy.c \
@@ -50,8 +48,6 @@ SRC = ft_atoi.c \
 	  ft_tolower.c \
 	  ft_toupper.c \
 	  ft_split.c \
-	  ft_strcat.c \
-	  ft_strcpy.c \
 
 EXTRA = ft_lstclear.c \
 		ft_lstnew.c \
@@ -61,7 +57,6 @@ EXTRA = ft_lstclear.c \
 		ft_lstadd_back.c \
 		ft_lstdelone.c \
 		ft_lstiter.c \
-		ft_lstmap.c \
 
 OBJ = $(SRC:.c=.o) 
 

@@ -2,21 +2,17 @@
 
 int		redir_check(char *str, int a)
 {
-	int i;
-
-	i = 0;
 	if (str[a] == '<' || str[a] == '>')
 		return (1);
 	return (0);
 }
 
-char	*redir_cpy(char *dest, char *str, int a)
+char	*redir_cpy(char *dest, char *str, int a, int quote)
 {
 	int b;
-	int quote;
 
 	b = 0;
-	if (str[a] && (redir_check(str, a)) || quote)
+	if ((str[a] && (redir_check(str, a))) || quote)
 		while (str[a] && (redir_check(str, a) || quote))
 		{
 			check_quotes(str[a], &quote);
@@ -43,7 +39,7 @@ int		redir_len(char *str, int a)
 
 	b = 0;
 	quote = 0;
-	if (str[a] && (!redir_check(str, a)) || quote)
+	if ((str[a] && (!redir_check(str, a))) || quote)
 		while (str[a] && (!redir_check(str, a) || quote))
 		{
 			check_quotes(str[a], &quote);
@@ -69,7 +65,7 @@ char		*redir_create(char *str, int *a)
 	ret = (char*)malloc(sizeof(char) * (redir_len(str, *a) + 1));
 	if (!ret)
 		return (NULL);
-	redir_cpy(ret, str, *a);
+	redir_cpy(ret, str, *a, quote);
 	if (redir_check(str, *a))
 		while (redir_check(str, *a))
 			(*a)++;
@@ -108,7 +104,7 @@ int		redir_word_count(char *str)
 	return (i);
 }
 
-char	**ft_redir_n_quotes(const char *stre)
+char	**ft_redir_n_quotes(const char *stre, t_data *data)
 {
 	char	**tab;
 	char	*str;
@@ -131,5 +127,5 @@ char	**ft_redir_n_quotes(const char *stre)
 		b++;
 	}
 	tab[b] = NULL;
-	return (split_final_check(tab, quote));
+	return (split_final_check(tab, quote, data));
 }

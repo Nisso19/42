@@ -81,7 +81,7 @@ int     find_expansions(char  **word, int i, int b, int quote)
     return (substitute_expansion(word, &str));
 }
 
-int     parameter_expansions()
+int     parameter_expansions(t_data *data)
 {
     int     i;
     int     y;
@@ -89,7 +89,7 @@ int     parameter_expansions()
     t_token *token;
 
     i = 0;
-    input = data.input;
+    input = data->input;
     while(input[i].string)
     {
         y = -1;

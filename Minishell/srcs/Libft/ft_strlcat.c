@@ -14,9 +14,9 @@
 
 unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 {
-	unsigned int i;
-	unsigned int p;
-	unsigned int u;
+	unsigned int	i;
+	unsigned int	p;
+	unsigned int	u;
 
 	i = 0;
 	p = 0;

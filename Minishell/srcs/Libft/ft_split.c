@@ -6,13 +6,13 @@
 /*   By: yaainouc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 14:24:47 by yaainouc          #+#    #+#             */
-/*   Updated: 2020/12/01 17:45:09 by yaainouc         ###   ########.fr       */
+/*   Updated: 2021/02/10 15:39:53 by yaainouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		check(char *str, int a, char c)
+int	check(char *str, int a, char c)
 {
 	if (str[a] == c)
 		return (1);
@@ -20,10 +20,10 @@ int		check(char *str, int a, char c)
 		return (0);
 }
 
-int		word_count(char *str, char c)
+int	word_count(char *str, char c)
 {
-	int a;
-	int i;
+	int	a;
+	int	i;
 
 	a = 0;
 	i = 0;
@@ -46,7 +46,7 @@ int		word_count(char *str, char c)
 	return (i);
 }
 
-int		len(char *str, int a, char c)
+int	len(char *str, int a, char c)
 {
 	int	b;
 
@@ -61,7 +61,7 @@ int		len(char *str, int a, char c)
 
 char	*ft_cpy(char *dest, char *str, int a, char c)
 {
-	int b;
+	int	b;
 
 	b = 0;
 	while (!check(str, a, c) && str[a])
@@ -82,16 +82,17 @@ char	**ft_split(const char *stre, char c)
 	int		b;
 
 	str = (char *)stre;
-	tab = (char**)malloc(sizeof(char*) * (word_count(str, c) + 1));
+	tab = (char **)malloc(sizeof(char *) * (word_count(str, c) + 1));
+	if (!tab)
+		return (NULL);
 	a = 0;
 	b = 0;
 	while (str[a])
 	{
 		if (!check(str, a, c) && str[a])
 		{
-			tab[b] = (char*)malloc(sizeof(char) * (len(str, a, c) + 1));
-			ft_cpy(tab[b], str, a, c);
-			b++;
+			tab[b] = (char *)malloc(sizeof(char) * (len(str, a, c) + 1));
+			ft_cpy(tab[b++], str, a, c);
 			while (!check(str, a, c) && str[a])
 				a++;
 		}

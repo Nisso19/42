@@ -10,7 +10,7 @@ t_input     *init_input(char **pipelines)
     nb_pipes = 1;
     while (pipelines[++i])
         nb_pipes++;
-    input = (t_input *)malloc(sizeof(t_input) * nb_pipes + 1);
+    input = (t_input *)malloc(sizeof(t_input) * (nb_pipes + 1));
     if (!input)
         return (NULL);
     i = 0;
@@ -25,7 +25,7 @@ t_input     *init_input(char **pipelines)
     return (input);
 }
 
-t_token     *init_token(t_input input, char **words)
+t_token     *init_token(char **words)
 {
     int     i;
     int     nb_words;
@@ -35,7 +35,7 @@ t_token     *init_token(t_input input, char **words)
     nb_words = 0;
     while (words[nb_words])
         nb_words++;
-    token = (t_token *)malloc(sizeof(t_token) * nb_words + 1);
+    token = (t_token *)malloc(sizeof(t_token) * (nb_words + 1));
     while (words[i])
     {
         token[i].word = words[i];

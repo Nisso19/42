@@ -4,13 +4,12 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "get_next_line.h"
 #include "../srcs/Libft/libft.h"
 
 enum				e_error
 {
-	NONE,			// 0
-	SYNTAX_ERROR,	// 1
+	SYNTAX_ERROR,	// 0
+	NONE,			// 1
 };
 
 enum				e_redir
@@ -30,6 +29,7 @@ typedef struct		s_redir
 typedef struct		s_token
 {
 	char			*word;
+	int				type;
 	int				is_expanded;
 }					t_token;
 
@@ -38,7 +38,7 @@ typedef struct		s_input
 	char			*string;
 	t_token			*token;
 	char			*path;
-	int				type;
+	int				ftype;
 	int				fd_in;
 	int				fd_out;
 	int				stream_in;
@@ -56,14 +56,14 @@ typedef struct		s_data
 **	GLOBAL SHELL VARIABLE
 */
 
-t_data				data;
+//t_data				data;
 
 /*
 **	DEBUG
 */
 
-int					input_debug();
-int					tokens_debug();
+int					input_debug(t_data *data);
+int					tokens_debug(t_data *data);
 
 /*
 **	UTILS
@@ -78,21 +78,24 @@ int     			buffer_flush(char buf[20], char **str, int *b);
 **	LEXER
 */
 
+int					check_type(const char *str);
+int 				func_type(t_data *data);
+int					set_type(t_data *data);
 t_input				*init_input(char **pipelines);
-t_token				*init_token(t_input input, char **words);
-int					lexer();
-char				**ft_split_n_quotes(const char *stre, char *c);
+t_token				*init_token(char **words);
+int					lexer(t_data *data);
+char				**ft_split_n_quotes(const char *stre, char *c, t_data *data);
 int					split_check(char *str, int a, char *c);
 int					split_word_count(char *s, char *c);
-char				**split_final_check(char **tab, int quote);
-char				**ft_redir_n_quotes(const char *stre);
+char				**split_final_check(char **tab, int quote, t_data *data);
+char				**ft_redir_n_quotes(const char *stre, t_data *data);
 char				**ft_tabjoin(char **tab1, char **tab2);
 
 /*
 **	PARSER
 */
 
-int     			parameter_expansions();
+int     			parameter_expansions(t_data *data);
 
 
 
