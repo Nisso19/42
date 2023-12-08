@@ -1,0 +1,31 @@
+    Fixed a;
+    Fixed const b(5);
+    Fixed const c(10.10f);
+    Fixed const d(b);
+
+    a = Fixed(1234.5678f);
+    
+    std::cout << "a = " << a << std::endl;
+    std::cout << "b = " << b << std::endl;
+    std::cout << "c = " << c << std::endl;
+    std::cout << "d = " << d << std::endl;
+	
+	std::cout << b << "+" << d << "=" << b + d << std::endl;
+    std::cout << b << "-" << d << "=" << b - d << std::endl;
+    std::cout << b << "*" << d << "=" << b * d << std::endl;
+    std::cout << b << "/" << d << "=" << b / d << std::endl;
+
+    if (c > b)
+        std::cout << c << " is superior to " << b << " so c is superior to b" << std::endl;
+    if (b < c)
+        std::cout << b << " is inferior to " << c << " so b is inferior to c" << std::endl;
+    if (b >= d)
+        std::cout << b << " is superior or equal to " << d << " so b is superior or equal to d" << std::endl;
+    if (c <= a)
+        std::cout << c << " is inferior or equal to " << a << " so a is inferior or equal to c" << std::endl;
+    if (b == d)
+        std::cout << b << " is equal to " << d << " so b is equal to d" << std::endl;
+    if (a != c)
+		std::cout << a << " and " << c << " are differeent so a and c are different" << std::endl;
+
+test cpp 02
