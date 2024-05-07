@@ -7,6 +7,11 @@ Bureaucrat::Bureaucrat(): _name("Default"),  _grade(150)
 	return;
 }
 
+Bureaucrat::Bureaucrat(Bureaucrat const & ref) : _name(ref._name), _grade(ref._grade)
+{
+	std::cout << "Grade " << this->_grade << " Copy Bureaucrat " << this->_name << " has arrived" << std::endl;
+}
+
 Bureaucrat::Bureaucrat(std::string const & name, int grade): _name(name), _grade(150)
 {
 	if (grade > 150)
