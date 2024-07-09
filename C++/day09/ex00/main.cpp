@@ -5,7 +5,9 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		std::cout << "Usage: ./btc inputFile.txt" << std::endl;
 	(void) argv;
-	BitcoinExchange();
+	BitcoinExchange btc;
+
+	btc.retrieveValue(argv[1]);
 	// BitcoinExchange btc(db);
 	// std::string inF = argv[1];
 	// btc.showRes(inF);

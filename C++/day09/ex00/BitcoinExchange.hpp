@@ -27,7 +27,11 @@ class BitcoinExchange
 		double getValue( std::string & value );
 		time_t getKey(std::string& s_key);
 		void showMap();
+		double btcConverter(struct tm tm);
+		struct tm  & operator=( struct tm const & lhs);
+		// std::ifstream OpenFile(std::string path);
 		BitcoinExchange & operator=( BitcoinExchange & src );
+		void retrieveValue(std::string path);
 		void createMap(std::stringstream& dbstream);
 };
 bool operator!=( struct tm const & lhs,  struct tm const & rhs );
