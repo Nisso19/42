@@ -3,14 +3,9 @@
 int main(int argc, char **argv)
 {
 	if (argc != 2)
-		std::cout << "Usage: ./btc inputFile.txt" << std::endl;
+		return(std::cout << "Insert a file: ./BitcoinExchange file.txt " << std::endl , 0);
 	(void) argv;
 	BitcoinExchange btc;
-
 	btc.retrieveValue(argv[1]);
-	// BitcoinExchange btc(db);
-	// std::string inF = argv[1];
-	// btc.showRes(inF);
-	// std::map<time_t, float> m = btc.getMap();
 	return (0);
 }

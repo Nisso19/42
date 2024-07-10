@@ -6,7 +6,7 @@
 /*   By: yaainouc <yaainouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:49:47 by yaainouc          #+#    #+#             */
-/*   Updated: 2024/02/02 17:59:15 by yaainouc         ###   ########.fr       */
+/*   Updated: 2024/07/09 19:43:41 by yaainouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void out_of_range_test(void)
 		sp.addNumber(17);
 		sp.addNumber(9);
 		sp.addNumber(11);
-		sp.addNumber(11);
+		sp.addNumber(100);
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << "\n\n";
 	}

@@ -6,7 +6,7 @@
 /*   By: yaainouc <yaainouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:49:44 by yaainouc          #+#    #+#             */
-/*   Updated: 2024/02/02 17:49:45 by yaainouc         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:29:46 by yaainouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void list_test(void)
 	std::list<double> test;
 
 	test.push_back(4);
-	test.push_back(10.);
+	test.push_back(10);
 	test.push_back(5);
 	test.push_back(0);
 	try
@@ -61,11 +61,11 @@ static void deque_test(void)
 
 	test.push_back(45.);
 	test.push_back(20.);
-	test.push_back(105);
+	test.push_back(105.);
 	test.push_back(0);
 	try
 	{
-		std::deque<double>::const_iterator it = easyfind(test, 105.0);
+		std::deque<double>::const_iterator it = easyfind(test, 105);
 		std::cout << *it << std::endl;
 	}
 	catch (std::out_of_range& e)
