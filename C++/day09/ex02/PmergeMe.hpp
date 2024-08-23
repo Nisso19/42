@@ -36,11 +36,16 @@ class PmergeMe
         std::vector<std::pair<int, int> >  *_toSortVector;
 		std::vector<int> *_sortedVector;
 
-		std::list<int> *_toSortList;
+		std::list<std::pair<int, int> > *_toSortList;
 		std::list<int> *_sortedList;
-        void _fillContainer(int* array, int array_size);
+        void _fillVectorContainer(int* array, int array_size);
+        void _fillListContainer(int* array, int array_size);
         void printContainer(void);
-        void SortVector();
+        //void SortVector();
+        void merge(std::list<std::pair<int, int> >& clist, int begin, int mid, int end);
+        void merge(std::vector<std::pair<int, int> >& vector, int begin, int mid, int end);
+        template <typename T>
+        void sort(T& container, int begin, int end); 
 };
 
 #endif
