@@ -22,5 +22,5 @@ int main(int argc, char **argv)
             return(std::cout << "Invalid input\n", 0);
         i++;
     }
-    PmergeMe Sort(array, i, 0);
+    PmergeMe Sort(array, i, 1);
 }

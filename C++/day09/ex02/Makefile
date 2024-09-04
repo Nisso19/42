@@ -6,7 +6,7 @@
 #    By: yaainouc <yaainouc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:47:59 by yaainouc          #+#    #+#              #
-#    Updated: 2024/09/02 16:17:40 by yaainouc         ###   ########.fr        #
+#    Updated: 2024/09/04 18:12:04 by yaainouc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ all: clear $(NAME)
 -include $(DEP)
 $(NAME): $(OBJS) $(HEADER)
 	@$(CC) $(OBJS) -o $(NAME)
-	@echo "${CLEAR_SCREEN}"
+	# @echo "${CLEAR_SCREEN}"
 	@echo "\t${GREEN}---\t$@ 🗹\t---${RESET_C}"
 
 $(OBJDIR)/%.o: %.cpp $(HEADER)
@@ -58,7 +58,7 @@ $(OBJDIR)/%.o: %.cpp $(HEADER)
 	@echo "${CYAN}Generating ${NAME}'s objects.... ${RESET_C}" "${YELLOW}$@"
 
 clear			:
-	echo "${CLEAR_SCREEN}"
+	# echo "${CLEAR_SCREEN}"
 
 clean:
 	@$(RM) $(OBJDIR) $(OBJS)

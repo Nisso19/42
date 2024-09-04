@@ -25,6 +25,7 @@ class PmergeMe
     private:
 
         bool _container;
+        bool _odd;
         int _straggler;
         int _getIndex( int n );
 
@@ -43,10 +44,13 @@ class PmergeMe
         void _fillListContainer(int* array, int array_size);
         void printContainer(void);
         std::vector<int> createVectorY( int size );
+        std::list<int> createListY( int size );
         void sortVector(void);
-        std::vector<int> toInsertCreation();
-        int binarySearch(int value, int start, int end);
-        //void SortVector();
+        void sortList(void);
+        std::vector<int> toInsertCreationVector();
+        std::list<int> toInsertCreationList();
+        int binarySearchVector(int value, int start, int end);
+        int binarySearchList(int value, int start, int end);
         void merge(std::list<std::pair<int, int> >& clist, int begin, int mid, int end);
         void merge(std::vector<std::pair<int, int> >& vector, int begin, int mid, int end);
         template <typename T>
