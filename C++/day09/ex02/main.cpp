@@ -10,7 +10,6 @@ int main(int argc, char **argv)
 
     int i = 0;
     int *array = new int[argc];
-
     char *endptr = NULL;
     while(i != argc - 1)
     {
@@ -21,6 +20,11 @@ int main(int argc, char **argv)
         if(errno != 0)
             return(std::cout << "Invalid input\n", 0);
         i++;
-    }
-    PmergeMe Sort(array, i, 1);
+    } 
+    int *array2 = array;
+    std::cout << " array = " << array[i - 1] << std::endl;
+    PmergeMe SortVector(array, i, 0);
+    std::cout << " array = " << array2[i - 1] << std::endl;
+    PmergeMe SortList(array2, i, 1);
+    return 0;
 }

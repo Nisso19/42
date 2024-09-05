@@ -30,7 +30,7 @@ class PmergeMe
         int _getIndex( int n );
 
     public:
-        PmergeMe( int* array, int array_size, bool container );
+        PmergeMe( int * array, int array_size, bool container );
         PmergeMe(PmergeMe const & ToCopy);
         PmergeMe& operator=(PmergeMe const & ToAffect);
         ~PmergeMe(void);
@@ -40,8 +40,8 @@ class PmergeMe
 
 		std::list<std::pair<int, int> > *_toSortList;
 		std::list<int> *_sortedList;
-        void _fillVectorContainer(int* array, int array_size);
-        void _fillListContainer(int* array, int array_size);
+        int _fillVectorContainer(int* array, int array_size);
+        int _fillListContainer(int* array, int array_size);
         void printContainer(void);
         std::vector<int> createVectorY( int size );
         std::list<int> createListY( int size );
