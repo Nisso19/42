@@ -249,7 +249,7 @@ int PmergeMe::binarySearchList(int value, int start, int end)
 std::list<int> PmergeMe::toInsertCreationList()
 {
 	std::list<int> toInsert;
-	int size =  _toSortVector->size();
+	int size =  _toSortList->size();
 	if(size == 0 && _odd == 1)
 	{
 		toInsert.push_back(_straggler);
@@ -262,23 +262,23 @@ std::list<int> PmergeMe::toInsertCreationList()
 	std::list<int> listY;
 	listY = createListY(size);
 	int i = 0;
-	int prev_number = 0;
+	int prev_number = -1;
 	std::list<int>::iterator it = listY.begin();
 	std::list<std::pair< int, int > >::iterator sortIt = _toSortList->begin();
 	int index = (*it);
 	std::advance(sortIt, index);
-	while(i < size)
+	while(it != listY.end())
 	{
-		prev_number = (*it);
-		while(index != prev_number)
+		while(index > prev_number )
 		{
+		std::cout << "index = " << index << std::endl;
 		toInsert.push_back((*sortIt).second);
 		index--;
 		std::advance(sortIt, index);
 		}
 		prev_number = (*it);
 		i++;
-		std::advance(it, i);
+		std::advance(it, 1);
 		index = (*it);
 	}
 	}
@@ -294,7 +294,6 @@ std::list<int> PmergeMe::toInsertCreationList()
 	if(_odd == 1)
 	{
 		toInsert.push_back(_straggler);
-		std::cout << "je suis la\n";
 	}
 	return(toInsert);
 }
@@ -319,7 +318,7 @@ std::vector<int> PmergeMe::toInsertCreationVector()
 	int index = vectorY[i];
 	while(vectorY[i])
 	{
-		while(index != prev_number)
+		while(index > prev_number)
 		{
 		toInsert.push_back((*_toSortVector)[index].second);
 		index--;
@@ -393,22 +392,27 @@ void PmergeMe::printContainer(void)
 	// 	std::cout << it->first << std::endl;
 	// 	std::cout << it->second << std::endl;
 	// }
+	int j = 0;
+	int i = 0;
 	if(_container == 0)
 	{
 	std::cout << "Sorted Vector = : \n";
 	for (std::vector<int> ::iterator it = _sortedVector->begin(); it != _sortedVector->end(); ++it)
 	{
 		std::cout << (*it) << std::endl;
-	}
+		i++;
+	}	
+	std::cout << "vector arguments : " << i << std::endl;
 	}
 	else
 	{
 	std::cout << "Sorted List = : \n";
 	for (std::list<int> ::iterator it = _sortedList->begin(); it != _sortedList->end(); ++it)
-
 	{
+		j++;
 		std::cout << (*it) << std::endl;
 	}
+	std::cout << "list arguments : " << j << std::endl;
 	}
 }
 
