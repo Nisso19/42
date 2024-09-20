@@ -203,6 +203,7 @@ void PmergeMe::sortList(void)
 	_sortedList->push_back(_toSortList->begin()->second);
 	for (std::list<std::pair<int, int> > ::iterator it = _toSortList->begin(); it != _toSortList->end(); ++it)
 	{
+	std::cout << it->first << std::endl;
 	_sortedList->push_back(it->first);
 	}
 	std::list<int> toInsert = toInsertCreationList();
@@ -213,6 +214,7 @@ void PmergeMe::sortList(void)
 	int test = binarySearchList((*it), 0, (*_sortedList).size() - 1);
 	std::list<int> ::iterator it2 = _sortedList->begin();
 	std::advance(it2, test);
+	std::cout << "y = " << (*it) << std::endl;
 	(*_sortedList).insert(it2, (*it));
 	i++;
 	}
@@ -271,7 +273,6 @@ std::list<int> PmergeMe::toInsertCreationList()
 	{
 		while(index > prev_number )
 		{
-		std::cout << "index = " << index << std::endl;
 		toInsert.push_back((*sortIt).second);
 		index--;
 		std::advance(sortIt, index);
@@ -354,12 +355,12 @@ int PmergeMe::_getIndex( int n )
 
 std::vector<int> PmergeMe::createVectorY(int size)
 {
+	int tab[20] = {3,5,11,21,43,85,171,341,683,1365,2731,5461,10923,21845,43691,87381,174763,349525,699051,1398101}
+
 	std::vector<int> vectorY;
-	int i = 3;
-	while ( _getIndex(i) < size - 1 )
+	while (i < 20 )
 	{
-		int temp = _getIndex(i);
-		vectorY.push_back(temp);
+		vectorY.push_back(tab[i]);
 		i++;
 	}
 	return ( vectorY );
@@ -418,7 +419,7 @@ void PmergeMe::printContainer(void)
 
 PmergeMe::~PmergeMe( void ) 
 {	
-	printContainer();
+	// printContainer();
 	delete _toSortVector;
 	delete _sortedVector;
 	delete _toSortList;
