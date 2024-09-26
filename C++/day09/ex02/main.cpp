@@ -30,13 +30,13 @@ int main(int argc, char **argv)
     } 
     int *array2 = new int[argc];
     memcpy(array2, array, sizeof(int) * i + 1);
-    start = clock();
-    PmergeMe SortList(array2, i, 1);
-    timeList = (clock() - start) / clock_per_us;
+    // start = clock();
+    // PmergeMe SortList(array2, i, 1);
+    // timeList = (clock() - start) / clock_per_us;
     // std::cout << "Temps list : " << timeList << "ms" << std::endl;
     start = clock();
     PmergeMe SortVector(array, i, 0);
     timeVector = (clock() - start) / clock_per_us;
-    // std::cout << "Temps vecteur : " << timeVector  << "ms" << std::endl;
+    std::cout << "Temps vecteur : " << timeVector  << "ms" << std::endl;
     return 0;
 }
