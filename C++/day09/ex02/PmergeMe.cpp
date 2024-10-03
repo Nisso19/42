@@ -34,6 +34,8 @@ PmergeMe::PmergeMe(int *array, int array_size, bool container ) : _container( co
 		if(_fillListContainer(array, array_size) != -1)
 			sortList();
 	}
+	std::cout << "Hein\n";
+	printContainer();
 
 }
 
@@ -170,13 +172,16 @@ void PmergeMe::merge(std::vector<std::pair<int, int> >& vector, int begin, int m
 template <typename T>
 void PmergeMe::sort(T& container, int begin, int end) 
 {
+	std::cout << "bonjour\n" << begin << " | " << end << std::endl;
     if (end - begin >= 1) 
 	{
+		std::cout << "pq pas\n" << std::endl;
         int mid = (begin + end) / 2;
         sort(container, begin, mid);
         sort(container, mid + 1, end);
         merge(container, begin, mid, end);
 	}
+	return;
 }
 
 void PmergeMe::sortVector(void)
@@ -188,7 +193,7 @@ void PmergeMe::sortVector(void)
 	_sortedVector->push_back(it->first);
 	}
 	std::vector<int> toInsert = toInsertCreationVector();
-	while(toInsert[i])
+	while((size_t)i < toInsert.size())
 	{
 	int test = binarySearchVector(toInsert[i], 0, (*_sortedVector).size() - 1);
 	std::vector<int> ::iterator it = _sortedVector->begin() + test;
@@ -221,7 +226,8 @@ void PmergeMe::sortList(void)
 int PmergeMe::binarySearchVector(int value, int start, int end)
 {
    int mid = (start + end + 1)  / 2;
-	
+   if(mid >= _sortedVector->size())	
+    return mid;
   if ((*_sortedVector)[mid] == value || end < start)
     return mid;
   else if ((*_sortedVector)[mid] > value)
@@ -262,10 +268,10 @@ std::list<int> PmergeMe::toInsertCreationList()
 	int i = 0;
 	int prev_number = 0;
 	std::list<int>::iterator it = listY.begin();
-	for (std::list<int>::iterator it2 = listY.begin(); it2 != listY.end(); ++it2)
-	{
-		std::cout << " vecY = " << (*it2) << std::endl;
-	}
+	// for (std::list<int>::iterator it2 = listY.begin(); it2 != listY.end(); ++it2)
+	// {
+	// 	std::cout << " vecY = " << (*it2) << std::endl;
+	// }
 	std::list<std::pair< int, int > >::iterator sortIt = _toSortList->begin();
 	int index = (*it);
 	std::advance(sortIt, index);
@@ -274,24 +280,29 @@ std::list<int> PmergeMe::toInsertCreationList()
 		while(index > prev_number )
 		{
 		toInsert.push_back((*sortIt).second);
-		std::cout << (*sortIt).second  << "  index = " << index << std::endl;
+		// std::cout << (*sortIt).second  << "  index = " << index << std::endl;
 		index--;
 		std::advance(sortIt, -1);
 		}
-		std::cout << "----------------------------------------" << std::endl;
 		prev_number = (*it);
 		i++;
 		std::advance(it, 1);
 		index = (*it);
+		sortIt = _toSortList->begin();
+		std::advance(sortIt, index);
 	}
 	}
 	else
 	{
-	for (std::list<std::pair<int, int> > ::iterator it = _toSortList->begin(); it != _toSortList->end(); ++it)
+	for (std::list<std::pair<int, int> > ::iterator it = _toSortList->begin(); it != _toSortList->end();)
 	{
 		if(it == _toSortList->begin())
-			std::advance(it, 1);
-		toInsert.push_back(it->second);
+		 	it++;
+		else
+		{
+			toInsert.push_back(it->second);
+			++it;
+		}
 	}
 	}
 	if(_odd == 1)
@@ -303,7 +314,6 @@ std::vector<int> PmergeMe::toInsertCreationVector()
 {
 	std::vector<int> toInsert;
 	int size =  _toSortVector->size();
-	std::cout << "size = " << size << std::endl;
 	if(size == 0 && _odd == 1)
 	{
 		toInsert.push_back(_straggler);
@@ -313,10 +323,10 @@ std::vector<int> PmergeMe::toInsertCreationVector()
 	{
 	std::vector<int> vectorY;
 	vectorY = createVectorY(size);
-	for (std::vector<int>::iterator it = vectorY.begin(); it != vectorY.end(); ++it)
-	{
-		std::cout << " vecY = " << (*it) << std::endl;
-	}
+	// for (std::vector<int>::iterator it = vectorY.begin(); it != vectorY.end(); ++it)
+	// {
+	// 	std::cout << " vecY = " << (*it) << std::endl;
+	// }
 	int i = 0;
 	int prev_number = 0;
 	int index = vectorY[i];
@@ -331,7 +341,7 @@ std::vector<int> PmergeMe::toInsertCreationVector()
 		prev_number = vectorY[i];
 		i++;
 		index = vectorY[i];
-		std::cout << " index = " << vectorY[i] << " prev number = " << prev_number << std::endl;
+		// std::cout << " index = " << vectorY[i] << " prev number = " << prev_number << std::endl;
 	}
 	}
 	else
@@ -343,7 +353,6 @@ std::vector<int> PmergeMe::toInsertCreationVector()
 	}
 	if(_odd == 1)
 	{
-		std::cout << " rajout = " << _straggler << std::endl;
 		toInsert.push_back(_straggler);
 	}
 	// for (std::vector<int>::iterator it = toInsert.begin(); it != toInsert.end(); ++it)
@@ -412,9 +421,10 @@ void PmergeMe::printContainer(void)
 	std::cout << "Sorted Vector = : \n";
 	for (std::vector<int> ::iterator it = _sortedVector->begin(); it != _sortedVector->end(); ++it)
 	{
-		std::cout << (*it) << std::endl;
+		std::cout << (*it) << ", ";
 		i++;
 	}	
+	std::cout << std::endl;
 	std::cout << "vector arguments : " << i << std::endl;
 	}
 	else
@@ -423,15 +433,15 @@ void PmergeMe::printContainer(void)
 	for (std::list<int> ::iterator it = _sortedList->begin(); it != _sortedList->end(); ++it)
 	{
 		j++;
-		std::cout << (*it) << std::endl;
+		std::cout << (*it) << ", ";
 	}
+	std::cout << std::endl;
 	std::cout << "list arguments : " << j << std::endl;
 	}
 }
 
 PmergeMe::~PmergeMe( void ) 
 {	
-	printContainer();
 	delete _toSortVector;
 	delete _sortedVector;
 	delete _toSortList;

@@ -2,13 +2,14 @@
 
 int main(int argc, char **argv)
 {
-    if (argc == 1)
+    if (argc <= 2)
     {
 	std::cout << "Usage: ./PmergeMe number [...]" << std::endl;
 	return (1);
     }
 
 	clock_t start;
+	clock_t start2;
 	double clock_per_us;
 	double timeVector;
 	double timeList;
@@ -31,12 +32,15 @@ int main(int argc, char **argv)
     int *array2 = new int[argc];
     memcpy(array2, array, sizeof(int) * i + 1);
     start = clock();
+    PmergeMe SortVector(array, i, 0);
+    timeVector = (clock() - start) / clock_per_us;
+    std::cout << "Temps vecteur : " << timeVector  << "ms" << std::endl;
+	std::cout << "----------------------------------------" << std::endl;
+    start2 = clock();
     PmergeMe SortList(array2, i, 1);
-    timeList = (clock() - start) / clock_per_us;
+    timeList = (clock() - start2) / clock_per_us;
     std::cout << "Temps list : " << timeList << "ms" << std::endl;
-    // start = clock();
-    // PmergeMe SortVector(array, i, 0);
-    // timeVector = (clock() - start) / clock_per_us;
-    // std::cout << "Temps vecteur : " << timeVector  << "ms" << std::endl;
+    delete[] array;
+    delete[] array2;
     return 0;
 }
