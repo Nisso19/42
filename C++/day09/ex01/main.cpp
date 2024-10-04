@@ -4,7 +4,7 @@
 int main(int argc, char **argv)
 {
 	if (argc != 2)
-		std::cout << "Usage: ./RPN mathematical_expression" << std::endl;
+		return(std::cout << "Usage: ./RPN mathematical_expression" << std::endl, 0);
 	std::string input(argv[1]);	
 	try
 	{

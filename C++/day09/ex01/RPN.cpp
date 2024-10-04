@@ -14,13 +14,16 @@ void RPN::calculation(const char input)
 	value_stack.pop();
 	j = value_stack.top();
 	value_stack.pop();
-	std::cout << "i = " << i << "j = " << j << std::endl;
 	if(input == '-')
 		return(value_stack.push(j - i));
 	else if(input == '+')
 		return(value_stack.push(j + i));
 	else if(input == '/')
+	{
+		if(i == 0)
+			throw (std::invalid_argument("Can't divide by 0"));
 		return(value_stack.push(j / i));
+	}
 	else if(input == '*')
 		return(value_stack.push(j * i));
 }
@@ -31,17 +34,14 @@ bool RPN::check_validity(const char input)
 		return 1;	
 	if(input != '-' && input != '+' && input != '/' && input != '*')
 	{
-		std::cout << "input = " << input << std::endl; 
 		return 0;
 	}
 	else if(value_stack.size() < 2)
 	{
-		std::cout << "teest2\n";
 		return 0;
 	}
 	else
 	{
-		std::cout << "teest3\n";
 		calculation(input);
 		return 1;
 	}
@@ -61,7 +61,7 @@ RPN::RPN(std::string& input)
 			throw(std::out_of_range("Invalid arguments"));
 		}
 	}
-	if(value_stack.size() > 1)
+	if(value_stack.size() > 1 || value_stack.empty())
 		throw(std::out_of_range("Invalid arguments"));
 }
 
